@@ -72,9 +72,22 @@ class Program
                     Console.WriteLine("Search by Book Title");
                     return;
                 case 2:
-                    Console.WriteLine("Search by Author");
+                    SearchEngine SeachRef = new SearchEngine();
+                    List<Book> booklist = SeachRef.SearchAuthor();
+                    if (booklist == null){continue;}
                     
-                    return;
+                    Console.WriteLine("\n All entries found:");
+                    foreach (Book book in booklist)
+                    {
+                        Console.WriteLine(book.Title);
+                    }
+                    Console.WriteLine("\n Please Select the Book you would like to check out");
+                    
+                    string userChoice = Console.ReadLine();
+                    Book userBookCheckedOut = SeachRef.CheckOutBook(userChoice);
+                    Console.WriteLine("Thank you for checking out " + userBookCheckedOut.Title);
+                    
+                    break;
                 case 3:
                     for (int i = 0; i < BooksRef.books.Count; i++)
                     {
@@ -88,11 +101,6 @@ class Program
             }
         }
 
-    }
-
-    static bool validInput(int input, int limit)
-    {
-        
     }
     
     static string IntDateToStringDate(int date)
