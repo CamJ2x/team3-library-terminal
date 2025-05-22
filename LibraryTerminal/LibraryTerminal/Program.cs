@@ -23,6 +23,7 @@ class Program
     {
         int currentDate = 122025;
         string date = IntDateToStringDate(currentDate);
+        
         ListOfBooks BooksRef = new ListOfBooks();
         bool userWantsToExit = false;
         Dictionary<int,string> terminalOptions = new Dictionary<int,string>();
@@ -72,6 +73,7 @@ class Program
                     return;
                 case 2:
                     Console.WriteLine("Search by Author");
+                    
                     return;
                 case 3:
                     for (int i = 0; i < BooksRef.books.Count; i++)
