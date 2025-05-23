@@ -4,7 +4,7 @@ public class ListOfBooks
 {
     public List<Book> books = new List<Book>()
     {
-        new Book("To Killa Mockingbird", "Harper Lee", isCheckedOut: true, dueDate:101825),
+        new Book("To Kill a Mockingbird", "Harper Lee", isCheckedOut: true, dueDate:101825),
         new Book("Pride and Prejudice", "Jane Austen", isCheckedOut: false, dueDate: 0),
         new Book("Philosopher's Stone", "J.K Rowling", isCheckedOut: true, dueDate:061525),
         new Book("Chamber of Secrets", "J.K Rowling", isCheckedOut: false, dueDate:0),

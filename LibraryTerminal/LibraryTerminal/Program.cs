@@ -69,8 +69,15 @@ class Program
             switch (userInput)
             {
                 case 1:
-                    Console.WriteLine("Search by Book Title");
-                    return;
+                    SearchEngine SearchTitle = new SearchEngine();
+                    string bookTitleList = SearchTitle.SearchTitle();
+                    if (bookTitleList == null){ continue;}
+                    
+                    Console.WriteLine("\n All Books Found: ");
+                    Console.WriteLine(bookTitleList);
+                    Console.WriteLine("\n Please Select the Book you would like to check out");
+                    
+                    break;
                 case 2:
                     SearchEngine SeachRef = new SearchEngine();
                     List<Book> booklist = SeachRef.SearchAuthor();

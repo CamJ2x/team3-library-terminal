@@ -10,15 +10,28 @@ public class SearchEngine
         Console.WriteLine("Let's search by the name. Enter book name: ");
         string bookName = Console.ReadLine();
         bookName = bookName.ToLower().Trim();
-        foreach (Book book in books)
+        bool DoesTitleExist = false;
+        string WantedBook = " ";
+        
+        
+        foreach (Book book in BooksRef.books)
         {
-            if (bookName == book.Title)
+            if (bookName == book.Title.ToLower().Trim())
             {
-                return book.Title;
+                DoesTitleExist = true;
+                books.Add(book);
+                WantedBook = book.Title;
             } ;
         }
-        return "No Book Found.";
-        
+
+        if (!DoesTitleExist)
+        {
+            Console.WriteLine("That book is not found in registry .");
+            return null;
+        }
+
+        return WantedBook;
+
     }
     
     public List<Book> SearchAuthor()
