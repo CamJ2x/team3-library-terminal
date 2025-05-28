@@ -70,12 +70,20 @@ class Program
             {
                 case 1:
                     SearchEngine SearchTitle = new SearchEngine();
-                    string bookTitleList = SearchTitle.SearchTitle();
+                    List<Book> bookTitleList = SearchTitle.SearchTitle();
                     if (bookTitleList == null){ continue;}
                     
                     Console.WriteLine("\n All Books Found: ");
-                    Console.WriteLine(bookTitleList);
+                    foreach (Book book in bookTitleList)
+                    {
+                        Console.WriteLine(book.Title);
+                    }
+                    
                     Console.WriteLine("\n Please Select the Book you would like to check out");
+                    
+                    string userDecision = Console.ReadLine();
+                    Book bookCheckedOut = SearchTitle.CheckOutBook(userDecision);
+                    Console.WriteLine("Thank you for checking out " + bookCheckedOut.Title);
                     
                     break;
                 case 2:

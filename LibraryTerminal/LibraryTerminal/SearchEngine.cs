@@ -5,7 +5,7 @@ public class SearchEngine
     ListOfBooks BooksRef = new ListOfBooks();
     List<Book> books = new List<Book>();
     
-    public string SearchTitle()
+    public List<Book> SearchTitle()
     {
         Console.WriteLine("Let's search by the name. Enter book name: ");
         string bookName = Console.ReadLine();
@@ -16,11 +16,11 @@ public class SearchEngine
         
         foreach (Book book in BooksRef.books)
         {
-            if (bookName == book.Title.ToLower().Trim())
+            if (book.Title.Contains(bookName))
             {
                 DoesTitleExist = true;
                 books.Add(book);
-                WantedBook = book.Title;
+                //WantedBook = book.Title;
             } ;
         }
 
@@ -30,7 +30,7 @@ public class SearchEngine
             return null;
         }
 
-        return WantedBook;
+        return books;
 
     }
     
