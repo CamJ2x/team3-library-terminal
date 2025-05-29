@@ -3,7 +3,7 @@ namespace LibraryTerminal;
 public class SearchEngine
 {
     ListOfBooks BooksRef = new ListOfBooks();
-    List<Book> books = new List<Book>();
+    public List<Book> books = new List<Book>();
     
     public List<Book> SearchTitle()
     {
@@ -16,7 +16,7 @@ public class SearchEngine
         
         foreach (Book book in BooksRef.books)
         {
-            if (book.Title.Contains(bookName))
+            if (book.Title.ToLower().Contains(bookName))
             {
                 DoesTitleExist = true;
                 books.Add(book);
@@ -36,10 +36,24 @@ public class SearchEngine
     
     public List<Book> SearchAuthor()
     {
-        Console.WriteLine("Let's search by the author. Enter book author: ");
+        List<String> Authors = new List<string>();
+        Console.WriteLine("All book authors in library: :");
+        foreach (Book book in BooksRef.books)
+        {
+            string author = book.Author;
+            if (!Authors.Contains(author))
+            {
+                Authors.Add(author);
+                Console.WriteLine(author);
+            }
+        }
+        
+        Console.WriteLine("\nLet's search by the author. Enter book author: ");
         string bookAuthor = Console.ReadLine();
         bookAuthor = bookAuthor.ToLower().Trim();
         bool DoesAuthorExist = false;
+
+        
         
         foreach (Book book in BooksRef.books)
         {

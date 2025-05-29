@@ -21,8 +21,7 @@ class Program
      
     static void Main(string[] args)
     {
-        int currentDate = 122025;
-        string date = IntDateToStringDate(currentDate);
+        DateTime currentDate = DateTime.Now;
         
         ListOfBooks BooksRef = new ListOfBooks();
         bool userWantsToExit = false;
@@ -36,7 +35,7 @@ class Program
         while (!userWantsToExit)
         {
             Console.WriteLine("*");
-            Console.WriteLine("The Current Date is " + date);
+            Console.WriteLine("The Current Date is " + currentDate);
             Console.WriteLine("------------------------------");
             Console.WriteLine("Welcome to the Library Terminal, Please select an option by number below:");
             Console.WriteLine("1. Search by Book Title");
@@ -73,17 +72,14 @@ class Program
                     List<Book> bookTitleList = SearchTitle.SearchTitle();
                     if (bookTitleList == null){ continue;}
                     
-                    Console.WriteLine("\n All Books Found: ");
+                    Console.WriteLine("\nAll Books Found: ");
                     foreach (Book book in bookTitleList)
                     {
                         Console.WriteLine(book.Title);
                     }
                     
-                    Console.WriteLine("\n Please Select the Book you would like to check out");
-                    
-                    string userDecision = Console.ReadLine();
-                    Book bookCheckedOut = SearchTitle.CheckOutBook(userDecision);
-                    Console.WriteLine("Thank you for checking out " + bookCheckedOut.Title);
+                    Console.WriteLine("\nPlease Select the Book you would like to check out");
+                    CheckOutBookProcess(SearchTitle);
                     
                     break;
                 case 2:
@@ -97,10 +93,7 @@ class Program
                         Console.WriteLine(book.Title);
                     }
                     Console.WriteLine("\n Please Select the Book you would like to check out");
-                    
-                    string userChoice = Console.ReadLine();
-                    Book userBookCheckedOut = SeachRef.CheckOutBook(userChoice);
-                    Console.WriteLine("Thank you for checking out " + userBookCheckedOut.Title);
+                    CheckOutBookProcess(SeachRef);
                     
                     break;
                 case 3:
@@ -116,6 +109,36 @@ class Program
             }
         }
 
+    }
+
+    static void CheckOutBookProcess(SearchEngine SearchRef)
+    {
+        string userDecision = Console.ReadLine();
+        bool bookvalid = false;
+        foreach (Book book in SearchRef.books)
+        {
+            if (book.Title == userDecision)
+            {
+                bookvalid = true;
+                break;
+            }
+        }
+
+        if (!bookvalid)
+        {
+            Console.WriteLine("Please enter a valid book title");
+            return;
+        }
+
+        Book bookCheckedOut = SearchRef.CheckOutBook(userDecision);
+        if (bookCheckedOut.IsCheckedOut == true)
+        {
+            Console.WriteLine("\nBook Checked-Out :(");
+            return;
+        }
+        Console.WriteLine("\nThank you for checking out " + bookCheckedOut.Title);
+        string BookDueDate = DateTime.Now.AddDays(14).Date.ToString("MM/dd/yyyy");
+        Console.WriteLine("The book will be due for return on " + BookDueDate);
     }
     
     static string IntDateToStringDate(int date)
