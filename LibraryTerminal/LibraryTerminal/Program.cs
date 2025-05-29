@@ -97,9 +97,10 @@ class Program
                     
                     break;
                 case 3:
+                    Console.WriteLine("\nList of All Books Found: ");
                     for (int i = 0; i < BooksRef.books.Count; i++)
                     {
-                        Console.WriteLine($"{i + 1}. {BooksRef.books[i].Title}");
+                        Console.WriteLine(BooksRef.books[i].Title);
                     }
                     break;
                 case 4:
